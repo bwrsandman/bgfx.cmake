@@ -47,17 +47,17 @@ if( MSVC )
 	target_include_directories( bx
 		PUBLIC
 			$<BUILD_INTERFACE:${BX_DIR}/include/compat/msvc>
-			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/compat/msvc>)
+			$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}/compat/msvc>)
 elseif( MINGW )
 	target_include_directories( bx
 		PUBLIC
 			$<BUILD_INTERFACE:${BX_DIR}/include/compat/mingw>
-			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/compat/mingw>)
+			$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}/compat/mingw>)
 elseif( APPLE )
 	target_include_directories( bx
 		PUBLIC
 			$<BUILD_INTERFACE:${BX_DIR}/include/compat/osx>
-			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/compat/osx>)
+			$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}/compat/osx>)
 endif()
 
 # All configurations
