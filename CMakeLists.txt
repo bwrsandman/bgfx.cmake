@@ -62,7 +62,7 @@ set(BGFX_CONFIG_MAX_SHADERS "" CACHE STRING "Specify shader count")
 set(BGFX_CONFIG_SORT_KEY_NUM_BITS_PROGRAM "" CACHE STRING "Specify maximum program count as 2^(program bits)")
 set(BGFX_CMAKE_USER_SCRIPT "" CACHE STRING "Path to custom cmake script to include")
 
-if (BGFX_CMAKE_USER_SCRIPT)
+if(BGFX_CMAKE_USER_SCRIPT)
 	include(${BGFX_CMAKE_USER_SCRIPT})
 endif()
 
@@ -141,6 +141,15 @@ if(BGFX_INSTALL)
 	# Use variables:
 	#   * TARGETS_EXPORT_NAME
 	#   * PROJECT_NAME
+	#   * BGFX_CMAKE_USER_SCRIPT_PRESENT
+	#   * BGFX_CMAKE_USER_SCRIPT_INSTALL_NAME
+	if(BGFX_CMAKE_USER_SCRIPT STREQUAL "")
+		set(BGFX_CMAKE_USER_SCRIPT_PRESENT OFF)
+		set(BGFX_CMAKE_USER_SCRIPT_INSTALL_NAME "NOT-USED")
+	else()
+		set(BGFX_CMAKE_USER_SCRIPT_PRESENT ON)
+		get_filename_component(BGFX_CMAKE_USER_SCRIPT_INSTALL_NAME ${BGFX_CMAKE_USER_SCRIPT} NAME)
+	endif()
 	configure_package_config_file(
 		"${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake.in" "${project_config}"
 		INSTALL_DESTINATION "${config_install_dir}"
@@ -193,6 +202,9 @@ if(BGFX_INSTALL)
 	)
 
 	# install tools
+	if(BGFX_CMAKE_USER_SCRIPT)
+		install(FILES ${BGFX_CMAKE_USER_SCRIPT} DESTINATION "${config_install_dir}")
+	endif()
 	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/bgfxToolUtils.cmake DESTINATION "${config_install_dir}")
 	if(BGFX_BUILD_TOOLS)
 		if(BGFX_BUILD_TOOLS_BIN2C)
