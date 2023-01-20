@@ -28,7 +28,7 @@ target_link_libraries(
 			fcpp
 			glslang
 			glsl-optimizer
-			spirv-opt
+			${SPIRV_TOOLS_OPT_LIBRARIES}
 			${SPIRV_CROSS_LIBARARIES}
 			webgpu
 )
