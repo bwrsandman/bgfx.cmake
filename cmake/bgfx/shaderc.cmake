@@ -23,23 +23,13 @@ add_executable(shaderc)
 target_link_libraries(
 	shaderc
 	PRIVATE bx
-			bgfx-vertexlayout
-			fcpp
-			glslang
-			glsl-optimizer
-			spirv-opt
-			spirv-cross
-)
-target_link_libraries(
-	shaderc
-	PRIVATE bx
 			bimg
 			bgfx-vertexlayout
 			fcpp
 			glslang
 			glsl-optimizer
 			spirv-opt
-			spirv-cross
+			${SPIRV_CROSS_LIBARARIES}
 			webgpu
 )
 if(BGFX_AMALGAMATED)
